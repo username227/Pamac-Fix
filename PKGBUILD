@@ -37,15 +37,15 @@ post_install() {
 PAMAC_FIX_INSTALL
 options=('!debug')
 
-_libpamac_commit='329ee50ea52dcb4ca822a1a02d87ca8ffcbbe339'
-_gtk_commit='774ba3f3e7ed0f3f77ef14a9624d6de7cc5c2537'
+_libpamac_commit='b2f06a46084aef5b6be3dbe63e7f9a12905cc279'
+_gtk_commit='2b1873a3e14fe6ae09f68c7a60d346df2445d7b5'
 _cli_commit='66a7df6ceb6928b7bee93924f7e49673d6913696'
 
 source=("libpamac-fix::git+https://github.com/username227/libpamac-fix.git#commit=${_libpamac_commit}"
 		"pamac-gtk-fix::git+https://github.com/username227/pamac-gtk-fix.git#commit=${_gtk_commit}"
 		"pamac-cli-fix::git+https://github.com/username227/pamac-cli-fix.git#commit=${_cli_commit}")
-sha256sums=('15a0e87553c42b9c3c33d4e76d5fddad7de091024bb8beb41fa053948e9e79e4'
-            '102e6246e1e073d4c576f91da3bcb67b9c85490c7e211eb7d0f499b52d59bba9'
+sha256sums=('5319b4cb646f4fa0fcdb34f83bb0d5ae5db65547a92857904ee45c63048a91b9'
+            '29a833d42b176ce267420b793dbddc337b1fd80659a3f5dbfe83451e611af839'
             'd7f03bc62225f3003760d7fcbf294401fb283d134b23d62923dfc0df91d3fd29')
 
 build() {
