@@ -22,7 +22,7 @@ This repo introduces several Quality-of-Life improvements to Pamac and libpamac 
 This repo is the forward-facing repo which joins the three components of pamac together. It takes from three repos:
 - [libpamac-fix](https://github.com/username227/libpamac-fix)
 - [pamac-cli-fix](https://github.com/username227/pamac-cli-fix)
-- [pamac-gtk-fix](https://github.com/username227/pamac-gtk-fix)
+- [pamac-gtk-fix](https://github.com/username227/pamac-gtk-fix) <p>
 To review the code that is underlying this pkgbuild, please visit these three repos.
 
 ## Development Warning
