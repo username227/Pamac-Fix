@@ -12,6 +12,7 @@ optdepends=('snapd: Snap package management support (requires a running snapd se
 provides=('libpamac=11.7.4' 'libpamac-aur=11.7.4' 'libpamac-full=1:11.7.4' 'libpamac-flatpak=1:11.7.4' 'libpamac.so' 'pamac=11.7.5' 'pamac-cli=11.7.4' 'pamac-aur=11.7.5' 'pamac-all=11.7.5')
 conflicts=('libpamac' 'libpamac-aur' 'libpamac-full' 'libpamac-flatpak' 'libpamac-full-fix' 'libpamac-full-fix-debug' 'pamac' 'pamac-cli' 'pamac-aur' 'pamac-all' 'pamac-flatpak' 'pamac-git' 'pamac-aur-git' 'pamac-gtk3' 'pamac-classic' 'pamac-classic-fixed' 'pamac-all-fix' 'pamac-cli-fix' 'pamac-gtk-fix')
 backup=('etc/pamac.conf')
+install='pamac-fix.install'
 options=('!debug')
 
 _libpamac_commit='329ee50ea52dcb4ca822a1a02d87ca8ffcbbe339'
@@ -118,4 +119,26 @@ package() {
   meson install -C "${_build_libpamac}" --destdir "${pkgdir}" --no-rebuild
   meson install -C "${_build_gtk}" --destdir "${pkgdir}" --no-rebuild
   meson install -C "${_build_cli}" --destdir "${pkgdir}" --no-rebuild
+
+  # Keep this PKGBUILD self-contained: makepkg copies the generated
+  # install script into .INSTALL when it assembles the finished package.
+  # The script only reports preserved configuration backups; it never
+  # alters or automatically restores /etc/pamac.conf.
+  cat > "${startdir:?}/${install}" <<'PAMAC_FIX_INSTALL'
+post_install() {
+    found=0
+    for saved in /etc/pamac.conf.pacsave*; do
+        [ -f "$saved" ] || continue
+        if [ "$found" -eq 0 ]; then
+            printf '\n:: Pamac-Fix: Previous configuration backups found:\n'
+            found=1
+        fi
+        printf '   %s\n' "$saved"
+    done
+    if [ "$found" -eq 1 ]; then
+        printf ':: Review these backups against /etc/pamac.conf and restore desired settings manually.\n'
+        printf ':: Pamac-Fix has not changed or restored the saved configurations.\n\n'
+    fi
+}
+PAMAC_FIX_INSTALL
 }
