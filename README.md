@@ -26,4 +26,4 @@ This repo is the forward-facing repo which joins the three components of pamac t
 To review the code that is underlying this pkgbuild, please visit these three repos.
 
 ## Development Warning
-This package should be considered an experimental release at this point. It has undergone real-world testing but still requires additional testing to ensure its stability. Any issues or troubles that arise should be reported under Issues.
+This package should be considered an experimental release at this point. It has undergone real-world testing but still requires additional testing to ensure its stability. Any issues or troubles that arise should be reported under Issues on this repository. Any pull requests to improve the code should be made on the underlying source repository.
